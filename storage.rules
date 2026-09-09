@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // أي حد يقدر يقرأ الصور (عشان تتحمل في التطبيق بـ Coil من رابط عام)
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if false; // الرفع بيتم من الـ Cloud Functions بس (Admin SDK)
+    }
+  }
+}
